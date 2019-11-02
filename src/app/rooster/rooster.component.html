@@ -1,3 +1,4 @@
+
 <table class="table mt-5 pt-5">
     <thead class="thead-light">
       <tr>
@@ -18,8 +19,8 @@
         <td>{{ course.description }}</td>
         <td>{{ course.schedule | date }}</td>
         <td>{{ course.maxRegistrationLimit }}</td>
-        <td><button class="btn btn-info"><span class="fas fa-address-book"></span></button></td>
-        <td><button class="btn btn-warning"><span class="fas fa-file-archive"></span></button></td>
+        <td><a class="btn btn-info"><span class="fas fa-address-book"></span></a></td>
+        <td><a class="btn btn-warning" (click)="setSelectedCourse(course)"><span class="fas fa-file-archive"></span></a></td>
         <td><button class="btn btn-danger">x</button></td>
       </tr>
     </tbody>

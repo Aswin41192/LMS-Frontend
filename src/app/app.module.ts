@@ -7,11 +7,13 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RoosterComponent } from './rooster/rooster.component';
+import { CourseDocumentComponent } from './course-document/course-document.component';
 @NgModule({
   declarations: [
     AppComponent,
     UserManagementComponent,
-    RoosterComponent
+    RoosterComponent,
+    CourseDocumentComponent
   ],
   imports: [
     BrowserModule,

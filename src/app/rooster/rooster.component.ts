@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../services/course.service';
 import { Course } from '../model/Course';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { DataTranserService } from '../services/data.transfer.service';
 
 @Component({
   selector: 'app-rooster',
@@ -13,11 +15,13 @@ export class RoosterComponent implements OnInit {
   courses: Course[] = [];
   course: Course = new Course();
 
-  constructor(private courseService: CourseService, private spinner: NgxSpinnerService) { }
+  constructor(private courseService: CourseService, private spinner: NgxSpinnerService,
+              private router: Router, private dataTransferService: DataTranserService) { }
 
   ngOnInit() {
     this.getAllCourses();
   }
+
   getAllCourses() {
     this.courses = [];
     this.spinner.show();
@@ -35,5 +39,8 @@ export class RoosterComponent implements OnInit {
     } );
   }
 
-
+setSelectedCourse(course: Course) {
+  this.dataTransferService.setData(course);
+  this.router.navigate(['/course/documents']);
+}
 }

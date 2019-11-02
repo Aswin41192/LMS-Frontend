@@ -1,0 +1,33 @@
+<div class="pt-5 mt-5 container-fluid">
+  <form #uploadForm="ngForm">
+      <label>Course Documents for:<span class="font-weight-bold"> {{course?.courseTitle }} </span> </label>
+      <div class="d-flex justify-content-end">
+    <input type="file" (change)="getUploadedFile($event.target.files)" placeholder="Upload Files">
+    <button class="btn btn-info" (click)="uploadDocument()">Upload</button>
+  </div>
+  </form>
+  <div class="row mt-2">
+    <div class="col-sm-12 d-flex justify-content-center"
+    *ngIf="!course || course.courseDocuments.length==0">
+        <div class="card">
+            <img class="card-img-top" src="../../assets/not-found.jfif">
+            <div class="card-body">
+                <p class="card-text text-center font-weight-bold">No Documents Available</p>
+            </div>
+        </div>
+      </div>
+
+    <div class="col-sm-3" *ngFor="let document of course?.courseDocuments">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../../assets/file-image.png">
+            <div class="card-body">
+              <p class="card-text text-center font-weight-bold">{{ document.name }} </p>
+              <p class="card-body text-center">
+                <button class="btn btn-info mr-2" (click)="downloadCourseDocument(document['_id'],document['name'])"><i class="fas fa-download"></i></button>
+                <button class="btn btn-danger" (click)="deleteCourseDocument(document['_id'])">X</button>
+              </p>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
