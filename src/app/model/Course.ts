@@ -6,7 +6,8 @@ export class Course {
    _id: string;
   courseTitle: string ;
   description: string ;
-  schedule: Date ;
+  schedule: any ;
+  duration = 8;
   maxRegistrationLimit: number ;
   courseDocuments: CourseDocument[] = [];
   courseAttendees: User[] = [];

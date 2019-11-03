@@ -8,12 +8,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RoosterComponent } from './rooster/rooster.component';
 import { CourseDocumentComponent } from './course-document/course-document.component';
+import { CourseAttendeeComponent } from './course-attendee/course-attendee.component';
+import { CourseComponent } from './course/course.component';
 @NgModule({
   declarations: [
     AppComponent,
     UserManagementComponent,
     RoosterComponent,
-    CourseDocumentComponent
+    CourseDocumentComponent,
+    CourseAttendeeComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

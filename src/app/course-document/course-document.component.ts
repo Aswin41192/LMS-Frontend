@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { DataTranserService } from '../services/data.transfer.service';
+import { DataTransferService } from '../services/data.transfer.service';
 import { CourseDocument } from '../model/CourseDocument';
 import { Course } from '../model/Course';
 import { CourseService } from '../services/course.service';
@@ -17,16 +17,17 @@ export class CourseDocumentComponent implements OnInit {
 
   @ViewChild('uploadedFile', { static: false })
   private host: ElementRef;
-  constructor(private dataTransferService: DataTranserService, private courseService: CourseService,
-    private spinner: NgxSpinnerService) { }
+  constructor(private courseService: CourseService,
+              private spinner: NgxSpinnerService, private dataTransferService: DataTransferService) { }
 
   ngOnInit() {
     this.course = this.dataTransferService.getData();
+    console.log('course', this.course);
   }
 
   downloadCourseDocument(documentId, fileName) {
-    console.log('Course document', documentId + ' ' + this.course['_id']);
-    this.courseService.downloadCourse(this.course['_id'], documentId, fileName);
+    console.log('Course document', documentId + ' ' + this.course._id);
+    this.courseService.downloadCourse(this.course._id, documentId, fileName);
   }
 
   deleteCourseDocument(documentId) {
@@ -34,8 +35,8 @@ export class CourseDocumentComponent implements OnInit {
     if (reply) {
       this.spinner.show();
       const payload = {
-        "_id": this.course._id,
-        "documentId": documentId
+        '_id': this.course._id,
+        'documentId': documentId
       };
       this.courseService.deleteCourse(payload).subscribe(res => {
         console.log('response', res);
@@ -60,11 +61,14 @@ export class CourseDocumentComponent implements OnInit {
     }
   }
   uploadDocument(uploadedFile) {
-    console.log('uploadedFile', uploadedFile.reset);
+    if (this.files.length === 0) {
+      alert('Select a file');
+      return;
+    }
     uploadedFile.reset();
     this.spinner.show();
     const formData: FormData = new FormData();
-    for (let i = 0; i<this.files.length; i++) {
+    for (let i = 0; i < this.files.length; i++) {
       formData.append('courseDocument', this.files[i]);
     }
     formData.append('_id', this.course._id);

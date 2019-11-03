@@ -1,5 +1,5 @@
 <div class="container-fluid mt-5 pt-5">
-  <form (ngSubmit)="saveUser();userForm.reset()" #userForm="ngForm">
+  <form (ngSubmit)="saveUser();userForm.reset()"  #userForm="ngForm">
     <div class="ml-2 form-row">
       <div class="col-md-2 form-group">
         <label class="mr-1">First Name </label>
@@ -47,7 +47,7 @@
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.email }}</td>
-        <td><button class="btn btn-warning" (click)="populateSelectedUser(user)">Update</button></td>
+        <td><button class="btn btn-warning" (click)="populateSelectedUser(user);">Update</button></td>
         <td><button class="btn btn-danger" (click)="deleteUser(user['_id'])">x</button></td>
       </tr>
     </tbody>

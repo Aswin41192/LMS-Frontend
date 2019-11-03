@@ -3,7 +3,7 @@ import { CourseService } from '../services/course.service';
 import { Course } from '../model/Course';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
-import { DataTranserService } from '../services/data.transfer.service';
+import { DataTransferService } from '../services/data.transfer.service';
 
 @Component({
   selector: 'app-rooster',
@@ -16,7 +16,7 @@ export class RoosterComponent implements OnInit {
   course: Course = new Course();
 
   constructor(private courseService: CourseService, private spinner: NgxSpinnerService,
-              private router: Router, private dataTransferService: DataTranserService) { }
+              private router: Router, private dataTransferService: DataTransferService) { }
 
   ngOnInit() {
     this.getAllCourses();
@@ -40,7 +40,19 @@ export class RoosterComponent implements OnInit {
   }
 
 setSelectedCourse(course: Course) {
+  console.log('Selected course', course);
   this.dataTransferService.setData(course);
+  console.log('Course Set ', this.dataTransferService.getData());
   this.router.navigate(['/course/documents']);
+}
+
+updateCourse(course: Course) {
+  this.dataTransferService.setData(course);
+  this.router.navigateByUrl('addCourse');
+}
+
+getCourseAttendees(course: Course) {
+  this.dataTransferService.setData(course);
+  this.router.navigate(['/courses/attendees', course._id]);
 }
 }

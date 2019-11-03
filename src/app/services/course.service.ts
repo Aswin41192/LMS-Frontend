@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Response } from '../model/Response';
 import { saveAs } from 'file-saver';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Course } from '../model/Course';
 
 
 @Injectable({
@@ -47,7 +48,19 @@ export class CourseService {
     return this.http.post<Response>(`${this.apiUrl}/courses/deleteDocument`, course, this.headerOptions);
   }
 
-  uploadCourseDocument(document): Observable<Response>{
+  createCourse(course: Course): Observable<Response> {
+    return this.http.post<Response>(`${this.apiUrl}/courses/save`, course, this.headerOptions);
+  }
+
+  updateCourse(course: Course): Observable<Response> {
+    return this.http.put<Response>(`${this.apiUrl}/courses/update`, course, this.headerOptions);
+  }
+
+  uploadCourseDocument(document): Observable<Response> {
     return this.http.post<Response>(`${this.apiUrl}/courses/saveDocument`, document);
+  }
+
+  getCourseAttendes(courseId): Observable<Response> {
+    return this.http.get<Response>(`${this.apiUrl}/courses/getAttendees?courseId=${courseId}`);
   }
 }

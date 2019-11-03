@@ -1,0 +1,30 @@
+<div class="container-fluid mt-5 pt-5">
+<label>Attendees for the course: <b>{{ course?.courseTitle }}</b></label>
+<div class="col-sm-12 d-flex justify-content-center"
+    *ngIf="!course || courseAttendees.length==0">
+        <div class="card">
+            <img class="card-img-top" src="../../assets/not-found.jfif">
+            <div class="card-body">
+                <p class="card-text text-center font-weight-bold">No Users Enrolled</p>
+            </div>
+        </div>
+      </div>
+ <table class="table mt-3 pt-3" *ngIf="course && courseAttendees.length>0" >
+  <thead class="thead-light">
+    <tr>
+      <th scope="col-md-1 form-group">#</th>
+      <th scope="col-md-1 form-group">First Name</th>
+      <th scope="col-md-1 form-group">Last Name</th>
+      <th scope="col-md-1 form-group">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let attendee of courseAttendees; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ attendee.firstName }}</td>
+      <td>{{ attendee.lastName }}</td>
+      <td>{{ attendee.email }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

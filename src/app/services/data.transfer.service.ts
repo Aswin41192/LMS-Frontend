@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class DataTranserService {
+export class DataTransferService {
   private data: any;
 
   setData(data: any) {

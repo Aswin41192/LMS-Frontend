@@ -1,5 +1,7 @@
+<div class="container-fluid mt-4 pt-5">
 
-<table class="table mt-5 pt-5">
+<a class="btn btn-primary mt-1 mb-3 float-right" title="Add Course" [routerLink]="['/addCourse']" routerLinkActive="router-link-active" ><i class="fas fa-plus"></i></a>
+<table class="table mt-3">
     <thead class="thead-light">
       <tr>
         <th scope="col-md-1 form-group">#</th>
@@ -15,13 +17,14 @@
     <tbody>
       <tr *ngFor="let course of courses; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td style="cursor:pointer;">{{ course.courseTitle }}</td>
+        <td style="cursor: pointer;"><a  (click)="updateCourse(course)">{{ course.courseTitle }}</a></td>
         <td>{{ course.description }}</td>
         <td>{{ course.schedule | date }}</td>
         <td>{{ course.maxRegistrationLimit }}</td>
-        <td><a class="btn btn-info"><span class="fas fa-address-book"></span></a></td>
+        <td><a class="btn btn-info" (click)="getCourseAttendees(course)"><span class="fas fa-address-book"></span></a></td>
         <td><a class="btn btn-warning" (click)="setSelectedCourse(course)"><span class="fas fa-file-archive"></span></a></td>
         <td><button class="btn btn-danger">x</button></td>
       </tr>
     </tbody>
   </table>
+</div>

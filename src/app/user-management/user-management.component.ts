@@ -12,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class UserManagementComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public users: User[];
-  public user: User = new User('', '', '');
+  public user: User = new User();
 
   constructor(private userService: UserService, private spinner: NgxSpinnerService) {
    }
@@ -64,7 +64,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
       if (res) {
           if (res.success) {
             alert('User Added Successfully');
-            this.user = new User('', '', '');
+            this.user = new User();
             this.getAllUsers();
           } else {
             alert(res.message);
@@ -76,7 +76,8 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   }
 
   populateSelectedUser(user) {
-    this.user = new User(user.firstName,user.lastName,user.email,user._id);
+    this.user = new User();
+    this.user = user;
     console.log(this.user);
   }
 
@@ -100,7 +101,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
       if (res) {
           if (res.success) {
             alert('User Updated Successfully');
-            this.user = new User('', '', '');
+            this.user = new User();
             this.getAllUsers();
           } else {
             alert(res.message);
