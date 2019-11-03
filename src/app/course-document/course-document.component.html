@@ -2,8 +2,9 @@
   <form #uploadForm="ngForm">
       <label>Course Documents for:<span class="font-weight-bold"> {{course?.courseTitle }} </span> </label>
       <div class="d-flex justify-content-end">
-    <input type="file" (change)="getUploadedFile($event.target.files)" placeholder="Upload Files">
-    <button class="btn btn-info" (click)="uploadDocument()">Upload</button>
+    <input type="file" (change)="getUploadedFile($event.target.files)" 
+    placeholder="Upload Files" multiple #uploadedFile>
+    <button class="btn btn-info" (click)="uploadDocument(uploadForm);">Upload</button>
   </div>
   </form>
   <div class="row mt-2">
