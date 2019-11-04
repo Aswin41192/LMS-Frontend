@@ -38,7 +38,7 @@ export class CourseDocumentComponent implements OnInit {
         '_id': this.course._id,
         'documentId': documentId
       };
-      this.courseService.deleteCourse(payload).subscribe(res => {
+      this.courseService.deleteCourseDocument(payload).subscribe(res => {
         console.log('response', res);
         if (res && res.success) {
           alert(res.response.message);

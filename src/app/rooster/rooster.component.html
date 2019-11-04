@@ -23,7 +23,7 @@
         <td>{{ course.maxRegistrationLimit }}</td>
         <td><a class="btn btn-info" (click)="getCourseAttendees(course)"><span class="fas fa-address-book"></span></a></td>
         <td><a class="btn btn-warning" (click)="setSelectedCourse(course)"><span class="fas fa-file-archive"></span></a></td>
-        <td><button class="btn btn-danger">x</button></td>
+        <td><button class="btn btn-danger" (click)="deleteCourse(course._id)">x</button></td>
       </tr>
     </tbody>
   </table>

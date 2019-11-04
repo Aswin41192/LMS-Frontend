@@ -44,8 +44,12 @@ export class CourseService {
   });
   }
 
-  deleteCourse(course): Observable<Response> {
+  deleteCourseDocument(course): Observable<Response> {
     return this.http.post<Response>(`${this.apiUrl}/courses/deleteDocument`, course, this.headerOptions);
+  }
+
+  deleteCourse(id: string): Observable<Response> {
+    return this.http.delete<Response>(`${this.apiUrl}/courses/delete/${id}`);
   }
 
   createCourse(course: Course): Observable<Response> {

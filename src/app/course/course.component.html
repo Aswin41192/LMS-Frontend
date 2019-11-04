@@ -67,7 +67,7 @@
     <div class="form-group form-row">
       <label class="col">Duration(in hours)</label>
       <input
-        class="col"
+        class="form-control col"
         type="text"
         name="duration"
         [(ngModel)]="course.duration"
@@ -86,7 +86,7 @@
     <div class="form-group form-row">
       <label class="col">Max Registration</label>
       <input
-        class="col"
+        class="col form-control"
         type="text"
         name="maxRegistrationLimit"
         [(ngModel)]="course.maxRegistrationLimit"
@@ -97,9 +97,8 @@
       <button
         type="submit"
         [disabled]="!courseForm.valid"
-        class="btn btn-success mr-1"
-      >
-        Create Course
+        class="btn btn-success mr-1">
+          Save
       </button>
       <button type="reset" class="btn btn-danger">Cancel</button>
     </div>

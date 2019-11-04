@@ -51,6 +51,22 @@ updateCourse(course: Course) {
   this.router.navigateByUrl('addCourse');
 }
 
+deleteCourse(course) {
+  const reply = confirm('Are you sure to delete the course');
+  if (reply) {
+  this.spinner.show();
+  this.courseService.deleteCourse(course).subscribe( res => {
+    if (res && res.success) {
+      alert(res.response.message);
+      this.getAllCourses();
+    } else {
+      alert(res.response.message);
+      this.spinner.hide();
+    }
+  });
+}
+}
+
 getCourseAttendees(course: Course) {
   this.dataTransferService.setData(course);
   this.router.navigate(['/courses/attendees', course._id]);

@@ -59,8 +59,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       if (res && res.success) {
         alert('Course updated successfully');
         this.router.navigateByUrl('');
-      }
-      else {
+      } else {
         alert('Error while creating course ');
       }
     });
