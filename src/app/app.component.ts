@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from './services/login.service';
+import { User } from './model/User';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'LMS';
+  user: User;
+  constructor(private loginService: LoginService) {
+  }
 }

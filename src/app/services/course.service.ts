@@ -27,6 +27,23 @@ export class CourseService {
     return this.http.get<Response>(`${this.apiUrl}/courses/get`);
   }
 
+  getAllCoursesForAttendee(id): Observable<Response> {
+    return this.http.get<Response>(`${this.apiUrl}/courses/getCoursesForAttendee/${id}`);
+  }
+
+  getEnrolledCoursesForAttendee(id): Observable<Response> {
+    return this.http.get<Response>(`${this.apiUrl}/courses/getEnrolledCourses/${id}`);
+  }
+
+  enrollAttendeeToCourse(course): Observable<Response> {
+    return this.http.post<Response>(`${this.apiUrl}/courses/saveAttendee`, course, this.headerOptions);
+  }
+
+  deregisterAttendee(course) {
+    console.log('deregisterAttendee', course);
+    return this.http.post<Response>(`${this.apiUrl}/courses/removeAttendee`, course, this.headerOptions);
+  }
+
   downloadCourse(courseId: string, documentId: string, fileName: string) {
     console.log(`${this.apiUrl}/courses/getDocs?documentId=${documentId}&courseId=${courseId}`);
     this.spinner.show();

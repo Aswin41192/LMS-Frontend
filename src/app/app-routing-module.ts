@@ -5,6 +5,9 @@ import { RoosterComponent } from './rooster/rooster.component';
 import { CourseDocumentComponent } from './course-document/course-document.component';
 import { CourseAttendeeComponent } from './course-attendee/course-attendee.component';
 import { CourseComponent } from './course/course.component';
+import { AttendeeViewComponent } from './attendee-view/attendee-view.component';
+import { EnrolledCourseViewComponent } from './enrolled-course-view/enrolled-course-view.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [{
   path: 'rooster',
@@ -21,6 +24,15 @@ const routes: Routes = [{
 }, {
   path: 'addCourse',
   component: CourseComponent
+}, {
+  path: 'userView',
+  component: AttendeeViewComponent
+}, {
+  path: 'enrolledCourses',
+  component: EnrolledCourseViewComponent
+}, {
+  path: 'login',
+  component: LoginComponent
 },
 {
   path: '',
