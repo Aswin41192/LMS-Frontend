@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         this.loginService.loggedInUser = user;
         this.loginService.userSubject.next(user);
         console.log('Logged in User', user);
+        localStorage.setItem('token',user.token);
         if (user.admin) {
           this.router.navigate(['rooster']);
         } else {

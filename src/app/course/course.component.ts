@@ -58,7 +58,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       this.spinner.hide();
       if (res && res.success) {
         alert('Course updated successfully');
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('rooster');
       } else {
         alert('Error while creating course ');
       }

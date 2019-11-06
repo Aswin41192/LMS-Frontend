@@ -19,6 +19,7 @@ export class AttendeeViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(document.cookie);
     this.spinner.show();
     this.courses = [];
     this.loginService.userSubject.subscribe(user => {

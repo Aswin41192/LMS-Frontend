@@ -10,13 +10,22 @@ import { User } from './model/User';
 export class LoginGuard implements CanActivate {
 
   user: User;
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
     this.loginService.userSubject.subscribe(user => {
-        this.user = user;
+      this.user = user;
     });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-     return !this.user._id;
+    if (!this.user._id) {
+      return true;
+    } else {
+      if (this.user.admin) {
+        this.router.navigate(['rooster']);
+      } else {
+        this.router.navigate(['userView']);
+      }
+      return false;
     }
+  }
 }
