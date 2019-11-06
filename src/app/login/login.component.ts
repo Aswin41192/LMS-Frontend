@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-login',
@@ -10,28 +11,48 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent implements OnInit {
 
-  email: string;
-  password: string;
+  usr: User = new User();
+  isSignUp = false;
 
-  constructor(private loginService: LoginService,private router: Router, private spinner: NgxSpinnerService) { }
+  constructor(private loginService: LoginService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
 
   authenticate() {
     this.spinner.show();
-    this.loginService.authenticate(this.email, this.password).subscribe(res => {
+    this.loginService.authenticate(this.usr.email, this.usr.password).subscribe(res => {
       console.log('Response', res);
-      this.spinner.hide();
       if (res && res.success) {
-        this.loginService.loggedInUser = res.response;
-        console.log('Logged in User', this.loginService.loggedInUser);
-        this.router.navigate(['']);
+        const user: User = res.response;
+        this.loginService.loggedInUser = user;
+        this.loginService.userSubject.next(user);
+        console.log('Logged in User', user);
+        if (user.admin) {
+          this.router.navigate(['rooster']);
+        } else {
+          this.router.navigate(['userView']);
+        }
       } else {
         alert(res.message);
       }
     });
   }
 
+  registerUser() {
+    this.spinner.show();
+    console.log('User to register', this.usr);
+    this.loginService.registerUser(this.usr).subscribe(res => {
+        if (res && res.success) {
+            this.usr = res.response;
+            this.loginService.userSubject.next(this.usr);
+            this.router.navigateByUrl('');
+            this.spinner.hide();
+        } else {
+          alert(res.message);
+          this.spinner.hide();
+        }
+    });
+  }
 
 }

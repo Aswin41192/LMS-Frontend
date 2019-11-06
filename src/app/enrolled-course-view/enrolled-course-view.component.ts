@@ -5,6 +5,7 @@ import { LoginService } from '../services/login.service';
 import { Course } from '../model/Course';
 import { DataTransferService } from '../services/data.transfer.service';
 import { Router } from '@angular/router';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-enrolled-course-view',
@@ -14,17 +15,26 @@ import { Router } from '@angular/router';
 export class EnrolledCourseViewComponent implements OnInit {
 
   courses: Course[] = [];
+  user: User;
   constructor(private courseService: CourseService, private spinner: NgxSpinnerService,
               private loginService: LoginService, private dataTransferService: DataTransferService,
-              private router: Router) { }
+              private router: Router) {
+                this.user = new User();
+              }
 
   ngOnInit() {
     this.courses = [];
-    const id = this.loginService.getLoggedInUser()._id;
-    this.getEnrolledCourse(id);
+
+    this.loginService.userSubject.subscribe(user => {
+       this.user = user;
+       console.log('Getting enrolled courses', this.user);
+       this.getEnrolledCourse(this.user._id);
+    });
+
   }
 
   getEnrolledCourse(id: string) {
+    console.log('Getting enrolled courses for '+ id);
     this.spinner.show();
     this.courseService.getEnrolledCoursesForAttendee(id).subscribe(res => {
       if (res && res.success) {
@@ -37,10 +47,11 @@ export class EnrolledCourseViewComponent implements OnInit {
   }
 
   deregisterFromCourse(id: string) {
+    console.log('Deregistering', this.user);
     const reply = confirm('Are you sure to withdraw from this course?');
     if (reply) {
       this.spinner.show();
-      const user = this.loginService.getLoggedInUser();
+      const user = this.user;
       const body = {
         _id: id,
         attendeeId: user._id

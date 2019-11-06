@@ -8,35 +8,45 @@ import { CourseComponent } from './course/course.component';
 import { AttendeeViewComponent } from './attendee-view/attendee-view.component';
 import { EnrolledCourseViewComponent } from './enrolled-course-view/enrolled-course-view.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [{
   path: 'rooster',
-  component: RoosterComponent
+  component: RoosterComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'users',
-  component: UserManagementComponent
+  component: UserManagementComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'course/documents',
-  component: CourseDocumentComponent
+  component: CourseDocumentComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'courses/attendees/:courseId',
-  component: CourseAttendeeComponent
+  component: CourseAttendeeComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'addCourse',
-  component: CourseComponent
+  component: CourseComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'userView',
-  component: AttendeeViewComponent
+  component: AttendeeViewComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'enrolledCourses',
-  component: EnrolledCourseViewComponent
+  component: EnrolledCourseViewComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'login',
-  component: LoginComponent
+  component: LoginComponent,
+  canActivate: [LoginGuard]
 },
 {
   path: '',
-  redirectTo: 'rooster',
+  redirectTo: 'login',
   pathMatch: 'full'
 }];
 
