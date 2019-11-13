@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+
   }
 
   authenticate() {
@@ -28,7 +29,6 @@ export class LoginComponent implements OnInit {
         this.loginService.loggedInUser = user;
         this.loginService.userSubject.next(user);
         console.log('Logged in User', user);
-        localStorage.setItem('token',user.token);
         if (user.admin) {
           this.router.navigate(['rooster']);
         } else {
@@ -44,15 +44,20 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     console.log('User to register', this.usr);
     this.loginService.registerUser(this.usr).subscribe(res => {
-        if (res && res.success) {
-            this.usr = res.response;
-            this.loginService.userSubject.next(this.usr);
-            this.router.navigateByUrl('');
-            this.spinner.hide();
+      if (res && res.success) {
+        this.usr = res.response;
+        this.loginService.loggedInUser = this.usr;
+        this.loginService.userSubject.next(this.usr);
+        if (this.usr.admin) {
+          this.router.navigate(['rooster']);
         } else {
-          alert(res.message);
-          this.spinner.hide();
+          this.router.navigate(['userView']);
         }
+        this.spinner.hide();
+      } else {
+        alert(res.message);
+        this.spinner.hide();
+      }
     });
   }
 
